@@ -3,7 +3,7 @@
 
 export default function Header() {
   return (
-    <header className="glass-panel fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 rounded-xl mx-4 mt-4">
+    <header className="glass-panel sticky top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4">
       {/* Brand */}
       <div className="flex items-center gap-3">
         <span

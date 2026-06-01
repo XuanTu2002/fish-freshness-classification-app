@@ -63,11 +63,10 @@ export default function ResultState({
 
   return (
     <main
-      className="flex items-center justify-center w-full animate-fade-in-up"
+      className="flex flex-1 items-center justify-center w-full animate-fade-in-up"
       style={{
-        minHeight: "calc(100vh - 80px - 60px)",
-        paddingTop: "96px",
-        paddingBottom: "80px",
+        paddingTop: "1.5rem",
+        paddingBottom: "1.5rem",
         paddingLeft: "2rem",
         paddingRight: "2rem",
       }}
@@ -132,8 +131,8 @@ export default function ResultState({
         {/* ── Right column: Analysis panel ── */}
         <div className="md:col-span-7">
           <div
-            className="glass-panel rounded-xl w-full flex flex-col gap-6 relative overflow-hidden"
-            style={{ padding: "2.5rem" }}
+            className="glass-panel rounded-xl w-full flex flex-col gap-4 relative overflow-hidden"
+            style={{ padding: "1.5rem" }}
           >
 
             {/* Header: label + confidence */}
@@ -151,7 +150,7 @@ export default function ResultState({
                 <h2
                   style={{
                     fontFamily: "var(--font-playfair, 'Playfair Display', serif)",
-                    fontSize: "clamp(40px, 5vw, 72px)",
+                    fontSize: "clamp(32px, 3.5vw, 48px)",
                     fontWeight: 700,
                     lineHeight: 1.1,
                     letterSpacing: "-0.02em",

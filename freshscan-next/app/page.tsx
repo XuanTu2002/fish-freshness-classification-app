@@ -79,7 +79,7 @@ export default function FreshScanPage() {
     setAppState("upload");
   }, [previewUrl]);
   return (
-    <div className="min-h-screen w-full flex flex-col relative">
+    <div className="h-[100dvh] w-full overflow-hidden flex flex-col relative">
       <Header />
 
       {appState === "upload" && (

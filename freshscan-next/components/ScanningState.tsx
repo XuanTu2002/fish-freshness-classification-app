@@ -8,11 +8,10 @@ interface ScanningStateProps {
 export default function ScanningState({ previewUrl }: ScanningStateProps) {
   return (
     <main
-      className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-8"
+      className="flex flex-1 flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-5"
       style={{
-        minHeight: "calc(100vh - 80px - 60px)",
-        paddingTop: "96px",
-        paddingBottom: "80px",
+        paddingTop: "1.5rem",
+        paddingBottom: "1.5rem",
         paddingLeft: "1.5rem",
         paddingRight: "1.5rem",
       }}
@@ -23,7 +22,7 @@ export default function ScanningState({ previewUrl }: ScanningStateProps) {
           className="text-surface-white drop-shadow-lg"
           style={{
             fontFamily: "var(--font-playfair, 'Playfair Display', serif)",
-            fontSize: "clamp(40px, 6vw, 72px)",
+            fontSize: "clamp(32px, 4.5vw, 56px)",
             fontWeight: 700,
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
@@ -44,7 +43,7 @@ export default function ScanningState({ previewUrl }: ScanningStateProps) {
         className="glass-panel w-full flex flex-col items-center justify-center rounded-xl border-2 relative overflow-hidden"
         style={{
           maxWidth: 480,
-          height: 200,
+          height: "clamp(140px, 20dvh, 180px)",
           borderColor: "rgba(0, 200, 180, 0.6)",
           borderStyle: "solid",
         }}
