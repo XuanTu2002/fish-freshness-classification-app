@@ -80,8 +80,8 @@ export default function FreshScanPage() {
   }, [previewUrl]);
 
   return (
-    /* Full-screen SPA — no scroll */
-    <div className="h-screen w-full overflow-hidden flex flex-col relative">
+    {/* Full-page layout — min-h-screen allows content to breathe on all environments */}
+    <div className="min-h-screen w-full flex flex-col relative">
       <Header />
 
       {appState === "upload" && (

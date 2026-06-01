@@ -43,7 +43,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} h-screen w-full overflow-hidden`}
+        className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} w-full min-h-screen`}
       >
         {children}
       </body>
