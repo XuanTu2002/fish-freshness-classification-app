@@ -78,9 +78,7 @@ export default function FreshScanPage() {
     setError(null);
     setAppState("upload");
   }, [previewUrl]);
-
   return (
-    {/* Full-page layout — min-h-screen allows content to breathe on all environments */}
     <div className="min-h-screen w-full flex flex-col relative">
       <Header />
 
