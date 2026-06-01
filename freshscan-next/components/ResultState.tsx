@@ -65,13 +65,13 @@ export default function ResultState({
     <main
       className="flex flex-1 items-center justify-center w-full animate-fade-in-up"
       style={{
-        paddingTop: "1.5rem",
-        paddingBottom: "1.5rem",
-        paddingLeft: "2rem",
-        paddingRight: "2rem",
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+        paddingLeft: "1.5rem",
+        paddingRight: "1.5rem",
       }}
     >
-      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
 
         {/* ── Left column: Image preview ── */}
         <div className="md:col-span-5 flex justify-center">
@@ -131,13 +131,13 @@ export default function ResultState({
         {/* ── Right column: Analysis panel ── */}
         <div className="md:col-span-7">
           <div
-            className="glass-panel rounded-xl w-full flex flex-col gap-4 relative overflow-hidden"
-            style={{ padding: "1.5rem" }}
+            className="glass-panel rounded-xl w-full flex flex-col gap-3 relative overflow-hidden"
+            style={{ padding: "1rem" }}
           >
 
             {/* Header: label + confidence */}
             <div
-              className="flex justify-between items-start border-b pb-6"
+              className="flex justify-between items-start border-b pb-3"
               style={{ borderColor: "rgba(160, 196, 216, 0.2)" }}
             >
               <div>
@@ -150,7 +150,7 @@ export default function ResultState({
                 <h2
                   style={{
                     fontFamily: "var(--font-playfair, 'Playfair Display', serif)",
-                    fontSize: "clamp(32px, 3.5vw, 48px)",
+                    fontSize: "clamp(24px, 2.5vw, 36px)",
                     fontWeight: 700,
                     lineHeight: 1.1,
                     letterSpacing: "-0.02em",
@@ -185,7 +185,7 @@ export default function ResultState({
                   <span
                     style={{
                       fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
-                      fontSize: 32,
+                      fontSize: 24,
                       color: "#00C8B4",
                       fontWeight: 500,
                     }}
@@ -251,14 +251,14 @@ export default function ResultState({
             {/* Probability distribution bar chart */}
             <div>
               <p
-                className="text-label-caps uppercase mb-6"
+                className="text-label-caps uppercase mb-3"
                 style={{ color: "rgba(160, 196, 216, 0.7)" }}
               >
                 Probability Distribution
               </p>
 
               <div
-                className="flex items-end gap-4 h-28 w-full border-b border-l pb-2 pl-2"
+                className="flex items-end gap-4 h-16 w-full border-b border-l pb-2 pl-2"
                 style={{ borderColor: "rgba(160, 196, 216, 0.2)" }}
               >
                 {probBars.map((g) => {

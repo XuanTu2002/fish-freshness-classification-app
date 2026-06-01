@@ -79,22 +79,25 @@ export default function FreshScanPage() {
     setAppState("upload");
   }, [previewUrl]);
   return (
-    <div className="h-[100dvh] w-full overflow-hidden flex flex-col relative">
+    <div className="h-[100dvh] w-full flex flex-col">
       <Header />
 
-      {appState === "upload" && (
-        <UploadState onAnalyze={handleAnalyze} error={error} />
-      )}
-      {appState === "scanning" && (
-        <ScanningState previewUrl={previewUrl} />
-      )}
-      {appState === "result" && result && (
-        <ResultState
-          result={result}
-          previewUrl={previewUrl}
-          onNewScan={resetState}
-        />
-      )}
+      {/* Scrollable content area — flex-1 fills remaining height, overflow-y-auto allows internal scroll */}
+      <div className="flex-1 overflow-y-auto flex flex-col">
+        {appState === "upload" && (
+          <UploadState onAnalyze={handleAnalyze} error={error} />
+        )}
+        {appState === "scanning" && (
+          <ScanningState previewUrl={previewUrl} />
+        )}
+        {appState === "result" && result && (
+          <ResultState
+            result={result}
+            previewUrl={previewUrl}
+            onNewScan={resetState}
+          />
+        )}
+      </div>
 
       <Footer />
     </div>
