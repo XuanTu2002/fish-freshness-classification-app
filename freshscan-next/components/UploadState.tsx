@@ -77,30 +77,30 @@ export default function UploadState({ onAnalyze, error }: UploadStateProps) {
 
   return (
     <main
-      className="flex flex-1 flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-5"
+      className="flex flex-1 flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-4"
       style={{
-        paddingTop: "1.5rem",
-        paddingBottom: "1.5rem",
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
         paddingLeft: "1.5rem",
         paddingRight: "1.5rem",
       }}
     >
       {/* Hero text */}
-      <div className="space-y-3 animate-fade-in-up">
+      <div className="space-y-2 animate-fade-in-up">
         <h1
           className="text-surface-white drop-shadow-lg"
           style={{
             fontFamily: "var(--font-playfair, 'Playfair Display', serif)",
-            fontSize: "clamp(32px, 4.5vw, 56px)",
+            fontSize: "clamp(24px, 3vw, 36px)",
             fontWeight: 700,
-            lineHeight: 1.1,
+            lineHeight: 1.15,
             letterSpacing: "-0.02em",
           }}
         >
           Phân tích độ tươi mắt cá tức thì
         </h1>
         <p
-          className="text-body-lg max-w-2xl mx-auto"
+          className="text-body-md max-w-2xl mx-auto"
           style={{ color: "rgba(160, 196, 216, 0.8)" }}
         >
           Powered by Swin Transformer · Upload a photo, get results in seconds
@@ -122,7 +122,7 @@ export default function UploadState({ onAnalyze, error }: UploadStateProps) {
         }`}
         style={{
           maxWidth: 480,
-          height: "clamp(140px, 20dvh, 180px)",
+          height: "clamp(120px, 15dvh, 150px)",
           borderColor: isDragOver ? "#00C8B4" : "rgba(0, 200, 180, 0.5)",
         }}
       >

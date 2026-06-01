@@ -82,8 +82,8 @@ export default function FreshScanPage() {
     <div className="h-[100dvh] w-full flex flex-col">
       <Header />
 
-      {/* Scrollable content area — flex-1 fills remaining height, overflow-y-auto allows internal scroll */}
-      <div className="flex-1 overflow-y-auto flex flex-col">
+      {/* Content area fills remaining height; overflow-hidden enforces no-scroll SPA */}
+      <div className="flex-1 overflow-hidden flex flex-col">
         {appState === "upload" && (
           <UploadState onAnalyze={handleAnalyze} error={error} />
         )}
