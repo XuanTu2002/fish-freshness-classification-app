@@ -97,7 +97,7 @@ export default function UploadState({ onAnalyze, error }: UploadStateProps) {
             letterSpacing: "-0.02em",
           }}
         >
-          Phân tích độ tươi mắt cá tức thì
+          Fish Freshness Check
         </h1>
         <p
           className="text-body-md max-w-2xl mx-auto"
