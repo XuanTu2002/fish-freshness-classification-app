@@ -9,11 +9,11 @@ import UploadState from "@/components/UploadState";
 import ScanningState from "@/components/ScanningState";
 import ResultState from "@/components/ResultState";
 
-/* Maps API label to Vietnamese and grade number */
+/* Maps API label to English and grade number */
 const LABEL_MAP: Record<FreshnessLabel, { label_vi: string; grade: number }> = {
-  "Highly Fresh": { label_vi: "Rất tươi",  grade: 3 },
-  "Fresh":        { label_vi: "Tươi",       grade: 2 },
-  "Not Fresh":    { label_vi: "Kém tươi",   grade: 1 },
+  "Highly Fresh": { label_vi: "Highly Fresh",  grade: 3 },
+  "Fresh":        { label_vi: "Fresh",       grade: 2 },
+  "Not Fresh":    { label_vi: "Not Fresh",   grade: 1 },
 };
 
 export default function FreshScanPage() {
@@ -64,7 +64,7 @@ export default function FreshScanPage() {
       setError(
         err instanceof Error
           ? err.message
-          : "Phân tích thất bại. Vui lòng thử lại."
+          : "Analysis failed. Please try again."
       );
       setAppState("upload");
     }

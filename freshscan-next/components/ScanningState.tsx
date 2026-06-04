@@ -28,7 +28,7 @@ export default function ScanningState({ previewUrl }: ScanningStateProps) {
             letterSpacing: "-0.02em",
           }}
         >
-          Phân tích độ tươi mắt cá tức thì
+          Real-time Fish Freshness Analysis
         </h1>
         <p
           className="text-body-lg max-w-2xl mx-auto"
@@ -101,7 +101,7 @@ export default function ScanningState({ previewUrl }: ScanningStateProps) {
         style={{ color: "rgba(160, 196, 216, 0.6)" }}
         aria-live="polite"
       >
-        Đang khởi động model, lần đầu có thể mất 30s…
+        Starting model, first run may take up to 30s…
       </p>
 
       {/* Analyzing button — disabled with spinner */}

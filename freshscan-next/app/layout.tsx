@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FreshScan AI — Phân tích độ tươi mắt cá",
+  title: "FreshScan AI — Fish Freshness Analysis",
   description:
     "AI-powered fish eye freshness analysis using Swin Transformer. Upload a photo, get results in seconds.",
   keywords: ["fish freshness", "AI", "Swin Transformer", "fish eye analysis"],
