@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 import time
 
-# ========== CẤU HÌNH ==========
+# ========== CONFIGURATION ==========
 st.set_page_config(
     page_title="Fish Freshness AI",
     layout="wide",
@@ -14,7 +14,7 @@ st.set_page_config(
     menu_items=None
 )
 
-# CSS cho màu sắc xanh đại dương + responsive
+# CSS for ocean blue color and responsive design
 st.markdown("""
 <style>
     :root {
@@ -133,7 +133,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ========== KHỞI TẠO SESSION STATE ==========
+# ========== INITIALIZE SESSION STATE ==========
 if 'page' not in st.session_state:
     st.session_state.page = "home"
 
@@ -146,36 +146,36 @@ if 'current_result' not in st.session_state:
 if 'uploaded_image' not in st.session_state:
     st.session_state.uploaded_image = None
 
-# ========== URL API ==========
+# ========== API URL ==========
 API_URL = "https://lucasclarke-fish-freshness-classification.hf.space/predict"
 
-# ========== DỮ LIỆU GỢI Ý ==========
+# ========== SUGGESTION DATA ==========
 COOKING_SUGGESTIONS = {
     "Highly Fresh": [
-        "🍡 Hấp nhẹ với nước dùng gà",
-        "🔥 Nướng mù tạt",
-        "🍲 Nấu cá kho tộ (1-2 ngày)",
-        "🥄 Ăn sống (sashimi) - an toàn nhất"
+        "🍡 Steam lightly with chicken broth",
+        "🔥 Grill with mustard sauce",
+        "🍲 Braised fish (1-2 days)",
+        "🥄 Eat raw (sashimi) - safest option"
     ],
     "Fresh": [
-        "🍲 Kho cá với gừng",
-        "🔥 Chiên xù cả con",
-        "🥘 Kho với dứa hoặc mơ",
-        "🍜 Nấu canh chua"
+        "🍲 Braised fish with ginger",
+        "🔥 Deep fried whole",
+        "🥘 Braised with pineapple or plum",
+        "🍜 Sour fish soup"
     ],
     "Not Fresh": [
-        "🍲 Kho cá 3-4 ngày",
-        "🔥 Chiên xù (tiêu diệt vi khuẩn)",
-        "🧂 Cơm cá muối",
-        "⚠️ Kiểm tra kỹ trước khi nấu"
+        "🍲 Braised fish (3-4 days)",
+        "🔥 Deep fried (kills bacteria)",
+        "🧂 Salted rice with fish",
+        "⚠️ Check carefully before cooking"
     ]
 }
 
-SHOP_LOCATION = "Chợ Hàng Dương, Hà Nội"  # Hardcoded vị trí
+SHOP_LOCATION = "Hanoi Central Market"  # Hardcoded location
 
-# ========== HÀM HELPER ==========
+# ========== HELPER FUNCTIONS ==========
 def add_to_history(label, confidence, location):
-    """Thêm vào lịch sử quét"""
+    """Add to scan history"""
     history_item = {
         "timestamp": datetime.now().isoformat(),
         "label": label,
@@ -183,44 +183,44 @@ def add_to_history(label, confidence, location):
         "location": location
     }
     st.session_state.history.insert(0, history_item)
-    if len(st.session_state.history) > 50:  # Giới hạn 50 items
+    if len(st.session_state.history) > 50:  # Limit to 50 items
         st.session_state.history = st.session_state.history[:50]
 
 def render_scanning_animation():
-    """Hiệu ứng radar quét"""
+    """Radar scanning animation effect"""
     placeholder = st.empty()
     for i in range(3):
         with placeholder.container():
             st.markdown(f"""
             <div style="text-align: center; font-size: 2rem;">
-                🔍 {'.' * (i + 1)} Quét AI...
+                🔍 {'.' * (i + 1)} Scanning AI...
             </div>
             """, unsafe_allow_html=True)
             time.sleep(0.3)
     placeholder.empty()
 
 def render_freshness_box(label, confidence):
-    """Hiển thị hộp chỉ số độ tươi"""
+    """Display freshness index box"""
     if label == "Highly Fresh":
         class_name = "freshness-high"
         emoji = "✨"
-        vi_label = "RẤT TƯƠI"
+        en_label = "VERY FRESH"
     elif label == "Fresh":
         class_name = "freshness-medium"
         emoji = "👍"
-        vi_label = "TƯƠI"
+        en_label = "FRESH"
     else:
         class_name = "freshness-low"
         emoji = "⚠️"
-        vi_label = "KHÔNG TƯƠI"
+        en_label = "NOT FRESH"
     
     st.markdown(f"""
     <div class="freshness-box {class_name}">
-        {emoji} {vi_label} {emoji}
+        {emoji} {en_label} {emoji}
     </div>
     """, unsafe_allow_html=True)
     
-    # Thanh tin cậy
+    # Confidence bar
     st.markdown(f"""
     <div class="confidence-bar">
         <div class="confidence-fill" style="width: {confidence*100}%">
@@ -229,30 +229,30 @@ def render_freshness_box(label, confidence):
     </div>
     """, unsafe_allow_html=True)
     
-    return f"{vi_label} - Độ tin cậy: {confidence:.1%}"
+    return f"{en_label} - Confidence: {confidence:.1%}"
 
-# ========== TRANG HOME ==========
+# ========== HOME PAGE ==========
 def page_home():
     st.markdown("""
     <div style="text-align: center; padding: 3rem 1rem;">
         <h1 style="color: #0066cc; font-size: 2.5rem; margin-bottom: 1rem;">🐟 Fish Freshness AI</h1>
         <p style="color: #666; font-size: 1.1rem; margin-bottom: 2rem;">
-            Kiểm tra độ tươi của cá chỉ trong 3 giây
+            Check fish freshness in just 3 seconds
         </p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Nút lớn Quét cá ngay
+    # Large Scan Now button
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        if st.button("📷 QUÉT CÁ NGAY", use_container_width=True, key="scan_btn"):
+        if st.button("📷 SCAN NOW", use_container_width=True, key="scan_btn"):
             st.session_state.page = "analysis"
             st.rerun()
     
     st.divider()
     
-    # Lịch sử quét
-    st.subheader("📜 Lịch sử quét gần nhất")
+    # Recent scan history
+    st.subheader("📜 Recent Scan History")
     
     if st.session_state.history:
         for idx, item in enumerate(st.session_state.history[:10]):
@@ -268,26 +268,26 @@ def page_home():
             st.markdown(f"""
             <div class="history-item">
                 <strong>{freshness_color} {item['label']}</strong> - 
-                Độ tin cậy: {item['confidence']:.1%} | 
+                Confidence: {item['confidence']:.1%} | 
                 {time_str} | 
                 📍 {item['location']}
             </div>
             """, unsafe_allow_html=True)
     else:
-        st.info("Chưa có lịch sử quét. Hãy quét cá đầu tiên!")
+        st.info("No scan history yet. Scan your first fish!")
 
-# ========== TRANG ANALYSIS ==========
+# ========== ANALYSIS PAGE ==========
 def page_analysis():
     st.markdown("""
     <div style="text-align: center; padding: 1rem;">
-        <h2 style="color: #0066cc;">📸 Tải ảnh con cá</h2>
+        <h2 style="color: #0066cc;">📸 Upload Fish Image</h2>
     </div>
     """, unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 3, 1])
     with col2:
         uploaded_file = st.file_uploader(
-            "Chọn file ảnh",
+            "Select image file",
             type=["jpg", "jpeg", "png"],
             key="file_uploader"
         )
@@ -296,20 +296,20 @@ def page_analysis():
         st.session_state.uploaded_image = uploaded_file
         
         image = Image.open(uploaded_file)
-        # Resize để fit 224x224 (chuẩn input model)
+        # Resize to fit 224x224 (standard model input)
         image_resized = image.resize((224, 224), Image.Resampling.LANCZOS)
         
-        # Hiển thị ảnh đã resize
+        # Display resized image
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            st.image(image_resized, use_column_width=True, caption='Ảnh sẽ được phân tích (224×224px)')
+            st.image(image_resized, use_column_width=True, caption='Image will be analyzed (224×224px)')
         
         st.divider()
         
-        # Nút dự đoán
+        # Predict button
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("🚀 DỰ ĐOÁN NGAY", use_container_width=True):
+            if st.button("🚀 PREDICT NOW", use_container_width=True):
                 with st.spinner(''):
                     render_scanning_animation()
                     
@@ -324,17 +324,17 @@ def page_analysis():
                             st.session_state.page = "result"
                             st.rerun()
                         else:
-                            st.error(f"❌ Lỗi API (Mã {response.status_code})")
+                            st.error(f"❌ API Error (Code {response.status_code})")
                     except Exception as e:
-                        st.error(f"❌ Lỗi kết nối: {str(e)}")
+                        st.error(f"❌ Connection Error: {str(e)}")
         
-        # Nút quay lại
+        # Go back button
         st.divider()
-        if st.button("⬅️ Quay lại", use_container_width=True):
+        if st.button("⬅️ Back", use_container_width=True):
             st.session_state.page = "home"
             st.rerun()
 
-# ========== TRANG RESULT ==========
+# ========== RESULT PAGE ==========
 def page_result():
     if not st.session_state.current_result:
         st.session_state.page = "home"
@@ -345,66 +345,66 @@ def page_result():
     label = result['label']
     confidence = result['confidence']
     
-    # Thêm vào lịch sử
+    # Add to history
     add_to_history(label, confidence, SHOP_LOCATION)
     
     st.markdown("""
     <div style="text-align: center; padding: 1rem;">
-        <h2 style="color: #0066cc;">📊 Kết quả phân tích</h2>
+        <h2 style="color: #0066cc;">📊 Analysis Results</h2>
     </div>
     """, unsafe_allow_html=True)
     
-    # Hiển thị ảnh đã quét
+    # Display scanned image
     if st.session_state.uploaded_image:
         image = Image.open(st.session_state.uploaded_image)
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            st.image(image, use_column_width=True, caption="Ảnh được phân tích")
+            st.image(image, use_column_width=True, caption="Image Analyzed")
     
     st.divider()
     
-    # Chỉ số độ tươi
-    st.markdown("### 🎯 Chỉ số độ tươi")
+    # Freshness index
+    st.markdown("### 🎯 Freshness Level")
     result_text = render_freshness_box(label, confidence)
     
     st.divider()
     
-    # Gợi ý chế biến
-    st.markdown("### 🍳 Gợi ý chế biến")
+    # Cooking suggestions
+    st.markdown("### 🍳 Cooking Suggestions")
     suggestions = COOKING_SUGGESTIONS.get(label, [])
     for suggestion in suggestions:
         st.markdown(f"- {suggestion}")
     
     st.divider()
     
-    # Thông tin quét
+    # Scan information
     st.markdown(f"""
     <div style="background: #f5f8fc; padding: 1rem; border-radius: 0.5rem; font-size: 0.9rem; color: #666;">
-        📍 <strong>Vị trí:</strong> {SHOP_LOCATION} | 
-        🕐 <strong>Thời gian:</strong> {datetime.now().strftime("%H:%M %d/%m/%Y")}
+        📍 <strong>Location:</strong> {SHOP_LOCATION} | 
+        🕐 <strong>Time:</strong> {datetime.now().strftime("%H:%M %d/%m/%Y")}
     </div>
     """, unsafe_allow_html=True)
     
-    # Nút tái quét
+    # Action buttons
     st.divider()
     col1, col2, col3 = st.columns(3)
     with col1:
-        if st.button("🔄 Quét lại", use_container_width=True):
+        if st.button("🔄 Rescan", use_container_width=True):
             st.session_state.page = "analysis"
             st.session_state.uploaded_image = None
             st.session_state.current_result = None
             st.rerun()
     
     with col2:
-        if st.button("🏠 Về trang chủ", use_container_width=True):
+        if st.button("🏠 Home", use_container_width=True):
             st.session_state.page = "home"
             st.rerun()
     
     with col3:
-        if st.button("📤 Chia sẻ kết quả", use_container_width=True):
-            st.info(f"📱 {label} - Độ tin cậy {confidence:.1%}\n📍 {SHOP_LOCATION}")
+        if st.button("📤 Share", use_container_width=True):
+            st.info(f"📱 {label} - Confidence {confidence:.1%}\n📍 {SHOP_LOCATION}")
 
-# ========== ĐIỀU HƯỚNG ==========
+# ========== NAVIGATION ==========
 if st.session_state.page == "home":
     page_home()
 elif st.session_state.page == "analysis":
