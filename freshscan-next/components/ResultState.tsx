@@ -19,21 +19,21 @@ const GRADE_ORDER: Array<{
 }> = [
   {
     label: "Highly Fresh",
-    label_vi: "Rất tươi",
+    label_vi: "Highly Fresh",
     grade: 3,
     color: "#16a34a",
     description: "Specimen shows optimal ocular clarity and corneal integrity.",
   },
   {
     label: "Fresh",
-    label_vi: "Tươi",
+    label_vi: "Fresh",
     grade: 2,
     color: "#d97706",
     description: "Specimen meets acceptable freshness standards.",
   },
   {
     label: "Not Fresh",
-    label_vi: "Kém tươi",
+    label_vi: "Not Fresh",
     grade: 1,
     color: "#dc2626",
     description: "Specimen shows signs of degradation. Not recommended for consumption.",
